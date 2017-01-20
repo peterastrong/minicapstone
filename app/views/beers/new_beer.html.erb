@@ -1,0 +1,39 @@
+<%= form_tag "/new_beer_result", method: :post do %>
+  <div>
+    Brand:
+    <input type="text" name="brand">
+  </div>
+
+  <div>
+    Style of beer:
+    <input type="text" name="style">
+  </div>
+
+  <div>
+    Name of the beer:
+    <input type="text" name="name">
+  </div>
+
+  <div>
+    Package size(Single, 6 pack, 12 pack):
+    <input type="text" name="package_size">
+  </div>
+
+  <div>
+    Bottle Size:
+    <input type="text" name="bottle_size">
+  </div>
+  <div>
+    Rating(1 to 99)
+    <input type="text" name="rating">
+  </div>
+  <div>
+    Price
+    <input type="text" name="price">
+  </div>
+
+  <div>
+    <input type="submit" value="Enter the beer!">
+  </div>
+
+<% end %>
