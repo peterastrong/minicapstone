@@ -1,7 +1,11 @@
-<h1>All the beers on this list :) </h1>
+<h1>All the beers are on this list :) </h1>
 
 <% @beers.each do |beer| %>
-<p>Title: </p>
+<a href="/beers/<%= beer.id %>"><p><%= beer.id %> Title: <%= beer.brand %> Style: <%= beer.style %></p>
+</a>
+
+
+<%= link_to beer.id, "/beers/#{beer.id}"  %>
 
 
 <% end %>

@@ -15,8 +15,13 @@ class BeersController < ApplicationController
   end
 
   def index
-    @beers = Beer.all? 
+    @beers = Beer.all 
     render "index.html.erb"
+  end 
+
+  def show 
+    @beer = Beer.find_by(id: params[:id])
+    render "show.html.erb"
   end 
 
 end
