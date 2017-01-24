@@ -3,4 +3,16 @@
 <p>Brand: <%= @beer.brand %></p>
 <p>Name: <%= @beer.name %> </p>
 <p>Style: <%= @beer.style %></p>
-<p>----------</p>
+<p>Rating: <%= @beer.rating_1to99 %></p>
+<p>Price: <%= @beer.price %></p>
+<div>
+<%= link_to "Edit this beer", "/beers/#{@beer.id}/edit", method: :get %>
+</div>
+<br>
+<div>
+<%= link_to "Delete this beer.", "/beers/#{@beer.id}", method: :delete %>
+</div>
+<br>
+<div>
+  <%= link_to "Go back to main page.", "/beers" %>
+</div>
