@@ -4,7 +4,10 @@
 <p>Name: <%= @beer.name %> </p>
 <p>Style: <%= @beer.style %></p>
 <p>Rating: <%= @beer.rating_1to99 %></p>
-<p>Price: <%= @beer.price %></p>
+<p>Description: <%= @beer.description %></p>
+<p class="<%= @beer.red_price %>">Price: <%= number_to_currency(@beer.price) %> <%= @beer.sale_message %></p>
+<p>Tax: <%= number_to_currency(@beer.tax) %></p>
+<p>Total Price: <%= number_to_currency(@beer.total) %> </p>
 <div>
 <%= link_to "Edit this beer", "/beers/#{@beer.id}/edit", method: :get %>
 </div>

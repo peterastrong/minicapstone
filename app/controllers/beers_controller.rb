@@ -1,7 +1,7 @@
 class BeersController < ApplicationController
   
   def index
-    @beers = Beer.all.sort 
+    @beers = Beer.order(rating_1to99: :desc)
     render "index.html.erb"
   end 
 
@@ -15,7 +15,7 @@ class BeersController < ApplicationController
   end
 
   def create
-    @beer = Beer.new(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating], price: params[:price])
+    @beer = Beer.new(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description],image: params[:image])
     @beer.save
     flash[:success] = "Congrats for adding another beer to the list!!"
     redirect_to "/beers/#{@beer.id}"
@@ -28,7 +28,7 @@ class BeersController < ApplicationController
 
   def update
     @beer = Beer.find_by(id: params[:id])
-    @beer.assign_attributes(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating], price: params[:price])
+    @beer.assign_attributes(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description])
     @beer.save
     flash[:success] = "The beer has been updated."
     redirect_to "/beers/#{@beer.id}"

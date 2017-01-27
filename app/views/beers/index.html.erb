@@ -1,8 +1,24 @@
 <h1>All the beers are on this list :) </h1>
 
-<% @beers.each do |beer| %>
-<a href="/beers/<%= beer.id %>"><p><%= beer.id %> Title: <%= beer.brand %> Style: <%= beer.style %></p>
-<p>-------</p>
-</a>
+
+<% @beers.each_slice(3) do |three_beers| %>
+  <div class="row">
+    <% three_beers.each do |beer| %>  
+      <div class="col-md-4">
+        <div class="well"><a href="/beers/<%= beer.id %>">         
+          <br>
+          <h5>Brand: <%= beer.brand %></h5>
+          <br>
+          <p>Style: <%= beer.style %></p>
+          <br>
+          <p>Name: <%= beer.name %></p>
+          <p>Rating: <%= beer.rating_1to99  %></p>
+          <p>Description: <%= beer.description %></p>
+          <img src="<%= beer.image %>">
+          <p>Updates On: <%= beer.update_time %></p>
+          </a>
+        </div>  
+      </div>    
+    <% end %>
+  </div>        
 <% end %>
-<%= link_to "Creat a new beer", "/beers/new" %>
