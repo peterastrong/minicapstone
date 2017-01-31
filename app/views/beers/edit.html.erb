@@ -21,11 +21,19 @@
   </div>
   <div>
     Rating:
-    <input type="text" name="rating" value="<%= @beer.rating_1to99 %>">
+    <input type="text" name="rating_1to99" value="<%= @beer.rating_1to99 %>">
   </div>
   <div>
     Price:
     <input type="text" name="price" value="<%= @beer.price %>">
+  </div>
+  <div>
+    Image: 
+    <input type="text" name="image" value="<%= @beer.image %>">
+  </div>
+  <div>
+    Supplier:
+    <input type="text" name="supplier_id" value="<%= @beer.supplier_id %>">
   </div>
   <div>
     <input type="submit" value="Update this beer.">

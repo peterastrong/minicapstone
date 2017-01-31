@@ -1,12 +1,29 @@
 class BeersController < ApplicationController
   
   def index
-    @beers = Beer.order(rating_1to99: :desc)
+    sort_attribute = params[:sort]
+    order = params[:order]
+    discount = params[:where]
+    search_result = params[:search_result]
+    if sort_attribute
+      @beers = Beer.order(sort_attribute => order)
+    elsif discount
+      @beers = Beer.where("price < ?", discount)
+    elsif search_result
+      @beers = Beer.where("name ILIKE ? or brand ILIKE ?", "%#{search_result}%", "%#{search_result}%")
+    else 
+      @beers = Beer.order(rating_1to99: :desc)
+    end 
     render "index.html.erb"
   end 
 
-  def show 
-    @beer = Beer.find_by(id: params[:id])
+  def show
+    
+    if params[:id] == "random" 
+      @beer = Beer.all.sample
+    else 
+      @beer = Beer.find_by(id: params[:id])
+    end 
     render "show.html.erb"
   end 
 
@@ -15,7 +32,7 @@ class BeersController < ApplicationController
   end
 
   def create
-    @beer = Beer.new(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description],image: params[:image])
+    @beer = Beer.new(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description],image: params[:image], supplier_id: params[:supplier_id])
     @beer.save
     flash[:success] = "Congrats for adding another beer to the list!!"
     redirect_to "/beers/#{@beer.id}"
@@ -28,7 +45,7 @@ class BeersController < ApplicationController
 
   def update
     @beer = Beer.find_by(id: params[:id])
-    @beer.assign_attributes(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description])
+    @beer.assign_attributes(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description], image: params[:image], supplier_id: params[:supplier_id])
     @beer.save
     flash[:success] = "The beer has been updated."
     redirect_to "/beers/#{@beer.id}"
@@ -41,5 +58,6 @@ class BeersController < ApplicationController
     flash[:danger] = "You have successfully deleted this beer."
     redirect_to "/beers"
   end
+
 
 end

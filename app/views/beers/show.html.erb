@@ -1,5 +1,4 @@
 <h1>This is a beer on the list </h1>
-
 <p>Brand: <%= @beer.brand %></p>
 <p>Name: <%= @beer.name %> </p>
 <p>Style: <%= @beer.style %></p>
@@ -19,3 +18,7 @@
 <div>
   <%= link_to "Go back to main page.", "/beers" %>
 </div>
+<p>Supplier: <%= @beer.supplier.name %></p>
+<% @beer.images.each do |image| %>
+<img src="<%= image.url %>">
+<% end %>

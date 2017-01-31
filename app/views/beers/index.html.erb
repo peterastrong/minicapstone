@@ -14,7 +14,8 @@
           <p>Name: <%= beer.name %></p>
           <p>Rating: <%= beer.rating_1to99  %></p>
           <p>Description: <%= beer.description %></p>
-          <img src="<%= beer.image %>">
+          <p>Price: <%= beer.price %></p>
+          <img src="<%= beer.images.first.url %>">
           <p>Updates On: <%= beer.update_time %></p>
           </a>
         </div>  
