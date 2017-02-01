@@ -28,7 +28,7 @@
         <li class="active"><a href="/beers/new"> Add New Beer<span class="sr-only">(current)</span></a></li>
         <li><a href="/beers">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Beer Info <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/beers?sort=price&order=asc">Price: Low to High</a></li>
             <li><a href="/beers?sort=price&order=desc">Price: High to low </a></li>
@@ -47,11 +47,14 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Info <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <% if current_user %>
+              <li><a href="/logout">Log Out</a></li>
+            <% else %>
+              <li><a href="/sign_up">Sign Up</a></li>
+              <li><a href="/login">Log In</a></li>
+            <% end %>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
