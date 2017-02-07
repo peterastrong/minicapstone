@@ -1,6 +1,10 @@
 class Beer < ApplicationRecord
   belongs_to :supplier
   has_many :images
+  has_many :carted_products
+  has_many :orders, through: :carted_products
+  has_many :beer_categories
+  has_many :categories, through: :beer_categories
   
   def sale_message
     if price < 2

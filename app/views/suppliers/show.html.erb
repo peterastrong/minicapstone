@@ -1,0 +1,11 @@
+<h1>a brewery</h1>
+<p> Supplier: <%= @supplier.name %> </p>
+<p>ID: <%= @supplier.id %></p>
+<p> Email: <%= @supplier.email %></p>
+<p>Phone: <%= @supplier.phone %></p>
+
+<a href="/suppliers/<%= @supplier.id %>/edit">Update this Brewery</a>
+
+
+
+ <!-- <%= link_to "Delete this supplier.", "/suppliers/#{@supplier.id}", method: :delete %> -->

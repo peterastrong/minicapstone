@@ -1,0 +1,12 @@
+
+
+<h3>order for <%= current_user.name %></h3>
+<p> Order #: <%= @order.id %></p>
+<p>Order Quantity: <%= @order.quantity %></p>
+<p>Subtotal: <%= @order.subtotal %></p>
+<p>Tax: <%= @order.tax %></p>
+<p>Total:<%= @order.total %></p>
+<p>Orderer's email: <%= @order.user.email %></p>
+<p>Bought: <%= @order.beer.name %></p>
+<img src="<%= @order.beer.images.first.url %>">
+<p>Created at: <%= @order.created_at.strftime("%m/%d/%Y") %></p>

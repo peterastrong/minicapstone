@@ -30,12 +30,21 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Beer Info <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li>Order by:</li>
             <li><a href="/beers?sort=price&order=asc">Price: Low to High</a></li>
             <li><a href="/beers?sort=price&order=desc">Price: High to low </a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/beers?where=10">Discount</a></li>
+            <li><a href="/beers?where=10">Discounts</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/beers/random">Random Beer</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/suppliers">Breweries</a></li>
+            <li role="separator" class="divider"></li>
+            <% Category.all.each do |category| %>
+              <li><a href="/beers?category=<%= category.name %>">
+                Category: <%= category.name.capitalize %>
+              </a></li>
+            <% end %>
           </ul>
         </li>
       </ul>

@@ -1,5 +1,5 @@
 <h1>This is a beer on the list </h1>
-<p>Brand: <%= @beer.brand %></p>
+<p>Brand: <%= @beer.id %></p>
 <p>Name: <%= @beer.name %> </p>
 <p>Style: <%= @beer.style %></p>
 <p>Rating: <%= @beer.rating_1to99 %></p>
@@ -7,6 +7,12 @@
 <p class="<%= @beer.red_price %>">Price: <%= number_to_currency(@beer.price) %> <%= @beer.sale_message %></p>
 <p>Tax: <%= number_to_currency(@beer.tax) %></p>
 <p>Total Price: <%= number_to_currency(@beer.total) %> </p>
+<h3>Categories</h3>
+<ul>
+  <% @beer.categories.each do |category| %>
+    <p><%= category.name.capitalize %></p>
+  <% end  %>
+</ul>
 <div>
 <%= link_to "Edit this beer", "/beers/#{@beer.id}/edit", method: :get %>
 </div>
@@ -18,7 +24,23 @@
 <div>
   <%= link_to "Go back to main page.", "/beers" %>
 </div>
-<p>Supplier: <%= @beer.supplier.name %></p>
+<p>   Supplier: <%= @beer.supplier.name %> </p>
 <% @beer.images.each do |image| %>
 <img src="<%= image.url %>">
+<% end %>
+<% if current_user %>
+<h3>Order form</h3>
+<%= form_tag "/carted_products", method: :post do %>
+  <div>
+    Quantity
+    <input type="text" name="quantity">
+  </div>
+  <div>
+    <input type="hidden" name="beer_id" value="<%= @beer.id  %>">
+  </div>
+  <div>
+    <input type="submit" value="Add to Cart">
+  </div>
+<% end %>
+
 <% end %>

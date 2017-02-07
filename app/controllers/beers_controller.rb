@@ -11,6 +11,9 @@ class BeersController < ApplicationController
       @beers = Beer.where("price < ?", discount)
     elsif search_result
       @beers = Beer.where("name ILIKE ? or brand ILIKE ?", "%#{search_result}%", "%#{search_result}%")
+    elsif params[:category]
+      selected_category = Category.find_by(name: params[:category])
+      @beers = selected_category.beers
     else 
       @beers = Beer.order(rating_1to99: :desc)
     end 
@@ -45,7 +48,7 @@ class BeersController < ApplicationController
 
   def update
     @beer = Beer.find_by(id: params[:id])
-    @beer.assign_attributes(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description], image: params[:image], supplier_id: params[:supplier_id])
+    @beer.assign_attributes(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description], supplier_id: params[:supplier_id])
     @beer.save
     flash[:success] = "The beer has been updated."
     redirect_to "/beers/#{@beer.id}"

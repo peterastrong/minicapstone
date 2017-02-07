@@ -1,0 +1,22 @@
+<h1>Suppliers:</h1>
+
+<% @suppliers.each_slice(3) do |three_suppliers| %>
+  <div class="row2" >
+    <% three_suppliers.each do |supplier| %>  
+      <div class="col-md-4">
+        <div class="well well2"><a href="/suppliers/<%= supplier.id %>">         
+          <br>
+          <h5>Company Name: <%= supplier.name %></h5>
+          <h4>ID: <%= supplier.id %></h4>
+          <h3>Contact information: </h3>
+          <br>
+          <p>email: <%= supplier.email %></p>
+          <br>
+          <p>phone: <%= supplier.phone %></p>
+          </a>
+        </div>  
+      </div>    
+    <% end %>
+  </div>        
+<% end %>
+

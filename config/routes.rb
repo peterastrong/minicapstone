@@ -11,6 +11,13 @@ Rails.application.routes.draw do
   delete "/beers/:id", to: "beers#destroy"
 
 #suppliers routes
+  get "/suppliers", to: "suppliers#index"
+  get "/suppliers/new", to: "suppliers#new"
+  post "/suppliers", to: "suppliers#create"
+  get "/suppliers/:id", to: "suppliers#show"
+  get "/suppliers/:id/edit", to: "suppliers#edit"
+  patch "/suppliers/:id", to: "suppliers#update"
+  delete "suppliers/:id", to: "suppliers#destroy"
 
 
 
@@ -28,5 +35,12 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   get "/logout", to: "sessions#destroy"
-  
+
+#orders routes
+  post "/orders", to: "orders#create"
+  get "/orders/:id", to: "orders#show"
+
+#carted products routes
+  post "/carted_products", to: "carted_products#create"
+  get "/carted_products", to: "carted_products#index"
 end
