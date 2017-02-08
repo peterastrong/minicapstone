@@ -1,6 +1,15 @@
 <h1>Shopping Cart</h1>
 
 <% @carted_products.each do |carted_product| %>
-  <p><%=  %></p>
-  <p><%= carted_product.quantity %></p>
+  <p><%= carted_product.beer.name %></p>
+  <p>Quantity: <%= carted_product.quantity %></p>
+  <img src="<%= carted_product.beer.images.first.url %>">
+  <%= link_to "Delete Item", "/carted_products/#{carted_product.id}", method: :delete %>
 <% end %>
+<br>
+<br>
+<br>
+<%= form_tag "/orders", method: :post do %>
+  <input type="submit" value="Buy Now.">
+  <% end %>
+
