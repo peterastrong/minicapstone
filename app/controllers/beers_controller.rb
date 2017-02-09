@@ -1,5 +1,6 @@
 class BeersController < ApplicationController
-  
+  #before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_admin!, except: [:index, :show]
   def index
     sort_attribute = params[:sort]
     order = params[:order]
@@ -31,60 +32,44 @@ class BeersController < ApplicationController
   end 
 
   def new
-    if current_user && current_user.admin
-      render "new.html.erb"
-    else
-      flash[:warning] = "Please login"
-      redirect_to "/login"
-    end 
+    @beer = Beer.new
+    render "new.html.erb"
   end
 
   def create
-    if current_user && current_user.admin
-      @beer = Beer.new(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description],image: params[:image], supplier_id: params[:supplier_id])
-      @beer.save
+    @beer = Beer.new(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description], supplier_id: params[:supplier_id])
+    if @beer.save
+      @beer.images.create(url: params[:image])
       flash[:success] = "Congrats for adding another beer to the list!!"
-      redirect_to "/beers/#{@beer.id}"
-    else 
-      flash[:warning] = "Please login"
-      redirect_to "/login"
-    end 
+      redirect_to "/beers/#{@beer.id}" 
+    else
+      render "new.html.erb"
+    end
   end 
 
   def edit 
-    if current_user && current_user.admin
-      @beer = Beer.find_by(id: params[:id])
-      render "edit.html.erb"
-    else 
-      flash[:warning] = "Please login"
-      redirect_to "/login"
-    end   
+    @beer = Beer.find_by(id: params[:id])
+    render "edit.html.erb"
   end 
 
   def update
-    if current_user && current_user.admin
-      @beer = Beer.find_by(id: params[:id])
-      @beer.assign_attributes(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description], supplier_id: params[:supplier_id])
-      @beer.save
+    @beer = Beer.find_by(id: params[:id])
+    @beer.assign_attributes(brand: params[:brand], style: params[:style], name: params[:name], package_size: params[:package_size], bottle_size: params[:bottle_size], rating_1to99: params[:rating_1to99], price: params[:price], description: params[:description], supplier_id: params[:supplier_id])
+    
+    if @beer.save
       flash[:success] = "The beer has been updated."
       redirect_to "/beers/#{@beer.id}"
-    else 
-      flash[:warning] = "Please login"
-      redirect_to "/login"
-    end 
+    else
+      render "edit.html.erb"
+    end  
   end
 
   def destroy
-    if current_user && current_user.admin
-      @beer = Beer.find_by(id: params[:id])
-      @beer_name_display = @beer.name
-      @beer.destroy
-      flash[:danger] = "You have successfully deleted this beer."
-      redirect_to "/beers"
-    else 
-      flash[:warning] = "Please login"
-      redirect_to "/login"
-    end 
+    @beer = Beer.find_by(id: params[:id])
+    @beer_name_display = @beer.name
+    @beer.destroy
+    flash[:danger] = "You have successfully deleted this beer."
+    redirect_to "/beers" 
   end
 
 

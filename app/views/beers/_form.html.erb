@@ -1,0 +1,72 @@
+
+<% if @beer.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@beer.errors.count, "error") %> prohibited this beer from being saved:</h2>
+ 
+    <ul>
+    <% @beer.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h1><%= header %></h1>
+
+
+<%= form_tag url, method: method_variable do %>
+  
+  <div class="form-group">
+    <label>Style of beer:</label> 
+    <input type="text" name="style" value="<%= @beer.style %>" >
+  </div>
+
+  <div class="form-group">
+    Name of the beer:
+    <input type="text" name="name" value="<%= @beer.name %>">
+  </div>
+
+  <div class="form-group">
+    Package size(Single, 6 pack, 12 pack):
+    <input type="text" name="package_size" value="<%= @beer.package_size %>">
+  </div>
+
+  <div class="form-group">
+    Bottle Size:
+    <input type="text" name="bottle_size" value="<%= @beer.bottle_size %>">
+  </div>
+
+  <div class="form-group">
+    Rating(1 to 99)
+    <input type="text" name="rating_1to99" value="<%= @beer.rating_1to99 %>">
+  </div>
+
+  <div class="form-group">
+    Description
+    <input type="text" name="description" value="<%= @beer.description %>">
+  </div>
+
+  <div class="form-group">
+    Price
+    <input type="text" name="price" value="<%= @beer.price %>">
+  </div>
+
+  <div class="form-group">
+    Image(link)
+    <input type="text" name="image">
+  </div >
+  
+  <div class="form-group">
+    Supplier ID: 
+    <select name="supplier_id">
+      <% Supplier.all.each do |supplier| %>
+        <option value="<%= supplier.id %>" class="black_text"><%= supplier.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" value="Enter the beer!">
+  </div>
+
+<% end %>

@@ -13,6 +13,7 @@
     <p><%= category.name.capitalize %></p>
   <% end  %>
 </ul>
+<% if current_user && current_user.admin %>
 <div>
 <%= link_to "Edit this beer", "/beers/#{@beer.id}/edit", method: :get %>
 </div>
@@ -21,6 +22,7 @@
 <%= link_to "Delete this beer.", "/beers/#{@beer.id}", method: :delete %>
 </div>
 <br>
+<% end %>
 <div>
   <%= link_to "Go back to main page.", "/beers" %>
 </div>
